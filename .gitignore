@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# Virtual env
+.venv/
+venv/
+
+# Test & tooling
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+
+# Data outputs
+output/
+*.csv
+*.parquet
