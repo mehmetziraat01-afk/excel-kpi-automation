@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Corporate Dashboard</h1>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="text-muted">Total Stock (kg)</h6>
+        <div class="fs-4 fw-semibold">{{ "%.3f"|format(total_stock_kg) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="text-muted">Today IN (kg)</h6>
+        <div class="fs-4 fw-semibold text-success">{{ "%.3f"|format(today_in_kg) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="text-muted">Today OUT Production (kg)</h6>
+        <div class="fs-4 fw-semibold text-danger">{{ "%.3f"|format(today_out_production_kg) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="text-muted">Suspicious Batches</h6>
+        <div class="fs-4 fw-semibold">{{ suspicious_batches_count }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-header">Stock by Material</div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover mb-0">
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th class="text-end">Current Stock (kg)</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for row in stock_by_material %}
+        <tr>
+          <td>{{ row.material_name }}</td>
+          <td class="text-end">{{ "%.3f"|format(row.current_stock_kg) }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
