@@ -1,0 +1,30 @@
+{% extends "_layout.html" %}
+{% block title %}Fix Batch{% endblock %}
+{% block content %}
+<h1 class='mb-1'>Fix Batch #{{ batch.id }} ({{ batch.id_batch }})</h1>
+<p class='text-muted'>Only zero-loaded items are shown.</p>
+<div class='card shadow-sm mb-4'>
+  <div class='card-body'>
+    <form method='post' action='/batches/{{ batch.id }}/fix-item'>
+      <div class='row g-3'>
+        <div class='col-md-3'><label class='form-label'>Batch Item ID</label><input name='batch_item_id' type='number' class='form-control' required></div>
+        <div class='col-md-3'><label class='form-label'>Corrected Weight</label><input name='corrected_weight' type='number' step='0.001' class='form-control' required></div>
+        <div class='col-md-6'><label class='form-label'>Correction Note (min 15)</label><input name='correction_note' class='form-control' required></div>
+      </div>
+      <button type='submit' class='btn btn-primary mt-3'>Fix Item</button>
+    </form>
+  </div>
+</div>
+<div class='table-responsive card shadow-sm'>
+  <table class='table table-striped mb-0 table-sticky'>
+    <thead><tr><th>Item ID</th><th>Material ID</th><th>Target</th><th>Loaded</th><th>Corrected</th><th>Note</th></tr></thead>
+    <tbody>
+      {% for i in items %}
+      <tr><td>{{ i.id }}</td><td>{{ i.material_id }}</td><td>{{ i.target_weight }}</td><td>{{ i.loaded_weight }}</td><td>{{ i.corrected_weight or '' }}</td><td>{{ i.correction_note or '' }}</td></tr>
+      {% else %}
+      <tr><td colspan='6' class='text-center text-muted'>No records</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

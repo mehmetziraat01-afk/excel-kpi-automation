@@ -1,0 +1,20 @@
+{% extends "_layout.html" %}
+{% block title %}Suspicious Batches{% endblock %}
+{% block content %}
+<h1 class='mb-3'>Suspicious Batches</h1>
+<div class='table-responsive card shadow-sm'>
+  <table class='table table-striped mb-0 table-sticky'>
+    <thead><tr><th>ID</th><th>ID Batch</th><th>Batch</th><th>Date</th><th>Zero Count</th><th>Reason</th><th></th></tr></thead>
+    <tbody>
+      {% for b in batches %}
+      <tr>
+        <td>{{ b.id }}</td><td>{{ b.id_batch }}</td><td>{{ b.batch_name }}</td><td>{{ b.date }}</td><td>{{ b.suspicious_count_zero }}</td><td>{{ b.suspicious_reason or '' }}</td>
+        <td><a class='btn btn-sm btn-primary' href='/batches/{{ b.id }}/fix'>Fix</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan='7' class='text-center text-muted'>No records</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

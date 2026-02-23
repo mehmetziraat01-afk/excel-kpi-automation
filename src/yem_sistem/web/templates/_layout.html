@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}yem_sistem{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .table-sticky thead th { position: sticky; top: 0; z-index: 1; background: #f8f9fa; }
+  </style>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid px-3">
+    <a class="navbar-brand" href="/dashboard">yem_sistem</a>
+    <div class="navbar-nav flex-row flex-wrap gap-2 small">
+      <a class="nav-link" href="/dashboard">Dashboard</a>
+      <a class="nav-link" href="/stocks">Stocks</a>
+      <a class="nav-link" href="/acceptance">Acceptance</a>
+      <a class="nav-link" href="/acceptance/new">New Acceptance</a>
+      <a class="nav-link" href="/analysis">Analysis</a>
+      {% if request.headers.get('x-role','').upper() == 'ADMIN' %}
+      <a class="nav-link" href="/analysis/external/new">External Lab Entry</a>
+      {% endif %}
+      <a class="nav-link" href="/batches/suspicious">Suspicious</a>
+      <a class="nav-link" href="/docs">Swagger</a>
+    </div>
+  </div>
+</nav>
+<main class="container-fluid py-4 px-3">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

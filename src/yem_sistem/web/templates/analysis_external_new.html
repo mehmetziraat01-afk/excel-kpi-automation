@@ -1,0 +1,28 @@
+{% extends "_layout.html" %}
+{% block title %}External Lab Entry{% endblock %}
+{% block content %}
+<h1 class="mb-3">External Lab Entry (ADMIN)</h1>
+<form method="post" action="/analysis/external" class="card card-body shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-2"><label class="form-label">Acceptance ID</label><input name="acceptance_id" class="form-control" type="number" value="{{ acceptance_id or '' }}" required></div>
+    <div class="col-md-2"><label class="form-label">Dry Matter %</label><input name="dry_matter_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Crude Protein %</label><input name="crude_protein_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Starch %</label><input name="starch_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">NDF %</label><input name="ndf_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">ADF %</label><input name="adf_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Ash %</label><input name="ash_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Fat %</label><input name="fat_percent" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Aflatoksin ppb</label><input name="aflatoksin_ppb" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Zearalenone</label><input name="zearalenone" type="number" step="0.001" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Yabancı Madde</label><select name="yabanci_madde" class="form-select"><option value="">-</option><option>VAR</option><option>YOK</option></select></div>
+    <div class="col-md-2"><label class="form-label">Tozluluk</label><select name="tozluluk" class="form-select"><option value="">-</option><option>AZ</option><option>COK</option></select></div>
+    <div class="col-md-3"><label class="form-label">Lab Name</label><input name="lab_name" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Report No</label><input name="report_no" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">Sample No</label><input name="sample_no" class="form-control"></div>
+    <div class="col-md-3"><label class="form-label">Kontrol Eden</label><input name="kontrol_eden" class="form-control"></div>
+    <div class="col-md-6"><label class="form-label">Other Myco</label><input name="other_myco" class="form-control"></div>
+    <div class="col-md-6"><label class="form-label">Açıklama</label><input name="aciklama" class="form-control"></div>
+  </div>
+  <button class="btn btn-primary mt-3" type="submit">Save External Analysis</button>
+</form>
+{% endblock %}

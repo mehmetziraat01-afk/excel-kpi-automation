@@ -1,0 +1,33 @@
+{% extends "_layout.html" %}
+{% block title %}Analysis List{% endblock %}
+{% block content %}
+<h1 class="mb-3">Analysis</h1>
+<form method="get" action="/analysis" class="card card-body shadow-sm mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-2"><label class="form-label">date_from</label><input name="date_from" type="date" value="{{ date_from }}" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">date_to</label><input name="date_to" type="date" value="{{ date_to }}" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">material_id</label><input name="material_id" type="number" value="{{ material_id }}" class="form-control"></div>
+    <div class="col-md-2"><label class="form-label">analysis_type</label><select name="analysis_type" class="form-select"><option value="">-</option><option value="INTERNAL" {% if analysis_type=='INTERNAL' %}selected{% endif %}>INTERNAL</option><option value="EXTERNAL" {% if analysis_type=='EXTERNAL' %}selected{% endif %}>EXTERNAL</option></select></div>
+    <div class="col-md-2"><label class="form-label">aflatoksin_min</label><input name="aflatoksin_min" value="{{ aflatoksin_min }}" class="form-control"></div>
+    <div class="col-md-1"><label class="form-label">yabanci</label><select name="yabanci_madde" class="form-select"><option value="">-</option><option value="VAR" {% if yabanci_madde=='VAR' %}selected{% endif %}>VAR</option><option value="YOK" {% if yabanci_madde=='YOK' %}selected{% endif %}>YOK</option></select></div>
+    <div class="col-md-1 d-grid"><button class="btn btn-primary" type="submit">Filter</button></div>
+  </div>
+</form>
+
+<div class="table-responsive card shadow-sm" style="max-height: 620px;">
+  <table class="table table-striped table-sticky mb-0">
+    <thead><tr><th>date</th><th>material_name</th><th>plate</th><th>company</th><th>analysis_type</th><th>sartoris_nem</th><th>hektometre</th><th>aflatoksin_ppb</th><th>zearalenone</th><th>lab_name</th><th>report_no</th><th>sample_no</th><th>kontrol_eden</th><th>aciklama</th></tr></thead>
+    <tbody>
+    {% for row, material_name in rows %}
+      <tr>
+        <td>{{ row.date }}</td><td>{{ material_name }}</td><td>{{ row.plate or '' }}</td><td>{{ row.company or '' }}</td><td>{{ row.analysis_type.value }}</td>
+        <td>{{ row.sartoris_nem or '' }}</td><td>{{ row.hektometre or '' }}</td><td>{{ row.aflatoksin_ppb or '' }}</td><td>{{ row.zearalenone or '' }}</td>
+        <td>{{ row.lab_name or '' }}</td><td>{{ row.report_no or '' }}</td><td>{{ row.sample_no or '' }}</td><td>{{ row.kontrol_eden or '' }}</td><td>{{ row.aciklama or '' }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="14" class="text-center text-muted">No records</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

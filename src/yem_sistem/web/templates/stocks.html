@@ -1,0 +1,46 @@
+{% extends "_layout.html" %}
+{% block title %}Corporate Stocks{% endblock %}
+{% block content %}
+<h1 class="mb-3">Corporate Stock Table</h1>
+
+<form method="get" action="/stocks" class="card card-body shadow-sm mb-3">
+  <div class="row g-3 align-items-end">
+    <div class="col-md-9">
+      <label class="form-label">Search by material name</label>
+      <input class="form-control" type="text" name="q" value="{{ q }}" placeholder="material name">
+    </div>
+    <div class="col-md-2">
+      <div class="form-check mt-4">
+        <input class="form-check-input" type="checkbox" name="only_critical" value="1" id="onlyCritical" {% if only_critical == 1 %}checked{% endif %}>
+        <label class="form-check-label" for="onlyCritical">only_critical=1</label>
+      </div>
+    </div>
+    <div class="col-md-1 d-grid"><button class="btn btn-primary" type="submit">Apply</button></div>
+  </div>
+</form>
+
+<div class="table-responsive card shadow-sm" style="max-height: 560px;">
+  <table class="table table-striped table-sticky mb-0">
+    <thead>
+      <tr>
+        <th>material_id</th>
+        <th>material_name</th>
+        <th class="text-end">current_stock_kg</th>
+        <th>last_movement_at</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.material_id }}</td>
+        <td>{{ row.material_name }}</td>
+        <td class="text-end">{{ '%.3f'|format(row.current_stock_kg) }}</td>
+        <td>{{ row.last_movement_at or '' }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="text-center text-muted">No records</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

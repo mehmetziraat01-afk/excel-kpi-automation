@@ -1,0 +1,20 @@
+{% extends "_layout.html" %}
+{% block title %}Acceptance List{% endblock %}
+{% block content %}
+<div class='d-flex justify-content-between align-items-center mb-3'>
+  <h1 class='mb-0'>Last 50 Acceptance Entries</h1>
+  <a href='/acceptance/new' class='btn btn-primary'>New</a>
+</div>
+<div class='table-responsive card shadow-sm'>
+  <table class='table table-striped mb-0 table-sticky'>
+    <thead><tr><th>ID</th><th>Date</th><th>Company</th><th>Plate</th><th>Material</th><th>Quantity</th><th>Note</th></tr></thead>
+    <tbody>
+      {% for r in rows %}
+      <tr><td>{{ r.id }}</td><td>{{ r.accepted_at }}</td><td>{{ r.company or '' }}</td><td>{{ r.plate }}</td><td>{{ r.material_id }}</td><td>{{ r.quantity }}</td><td>{{ r.note or '' }}</td></tr>
+      {% else %}
+      <tr><td colspan='7' class='text-center text-muted'>No records</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
